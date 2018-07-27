@@ -1,4 +1,5 @@
 ﻿using System;
+using Discord;
 using Discord.Commands;
 using System.Threading.Tasks;
 using System.IO;
@@ -8,44 +9,25 @@ using System.Linq;
 namespace FortniteTournamentBot.Modules
 {
 	public class CommandExecuter : ModuleBase<SocketCommandContext>
-    {
-		List<string> admin = new List<string>{};
-        [Command("init")]
-		public async Task init(){
-			admin.Add("284686457744916490");
-			TournamentHandler.init();
-			await Context.Channel.SendMessageAsync("Bot fully started");
-		}
+	{
 		[Command("test")]
 		public async Task test(){
 			await Context.Channel.SendMessageAsync("Tournament bot working");
 		}
         [Command("new")]
-		public async Task newTour(){
-			if (admin.Contains(Context.Message.Author.Id.ToString()))
-			{ }
-				TournamentHandler.newGame();
-
-				await Context.Channel.SendMessageAsync("Tournament started");
-			
-
-
-		}
-		[Command("setstart")]
-		public async Task set(int content)
-		{
-
-
-			if (!TournamentHandler.setStart(content))
+		public async Task newComp(string timeTo){
+			await Context.Channel.SendMessageAsync("Creating tournament for channel " + Context.Channel.Id);
+			try
 			{
-				await Context.Channel.SendMessageAsync("Start time already set, please start a new with !new");
-
+				TournamentHandler.New(Context.Channel.Id.ToString(), timeTo);
 			}
-			else
-			{
-				await Context.Channel.SendMessageAsync("Start time = " + content);
+			catch(Exception) {
+				await Context.Channel.SendMessageAsync("Tournament already going on!");
 			}
-
+			CommandHandler.WaitForTime = new string[] { Context.Message.Author.Id.ToString(), Context.Channel.Id.ToString() };
+			await Context.Channel.SendMessageAsync("Please enter end time");
 		}
+
+        
     }
 }

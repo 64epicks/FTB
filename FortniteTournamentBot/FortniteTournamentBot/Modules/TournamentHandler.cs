@@ -2,52 +2,24 @@
 using Discord.Commands;
 using System.Threading.Tasks;
 using System.IO;
-using System.Collections.Generic;
+using SharpDB;
 using System.Linq;
 
 public class TournamentHandler : ModuleBase
 {
-	static string datapath = "game.txt";
-	static bool initbo;
-	static List<string[]> full = new List<string[]> { };
-	static List<string> stringfull = new List<string> { };
-
-	public static void init()
+	static DB db = new DB(Environment.CurrentDirectory);
+	public static void New(string id, string timeTo)
 	{
-		full.Add(File.ReadAllLines(datapath));
-		Console.WriteLine(full.Count);
+		string[] time = timeTo.Split(';');
+		if (!db.DatabaseExists("Tournaments")) db.CreateDatabase("Tournaments");
+		db.EnterDatabase("Tournaments");
+		if (!db.TableExists("Tournaments", "timeLeft")) db.CreateTable("timeLeft", "Id;Time");
+		if (!db.TableExists("Tournaments", "timeStart")) db.CreateTable("timeStart", "Id;Time");
+		if (db.TableExists("Tournaments", id)) throw new Exception();
+		db.CreateTable(id, "Id;Name;Platform;ScoreWhenJoin;Score");
+		db.Insert("timeStart", id + ";" + time[0]);
+		db.Insert("timeLeft", id + ";" + time[1]);
+        
 	}
-	public static void newGame()
-	{
-		File.WriteAllLines(datapath, new List<string> { "" });
-		List<string> lines = new List<string> { };
-		lines.Add("<created>" + DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds.ToString() + "</created>");
-		File.WriteAllLines(datapath, lines);
-	}
-	public static bool setStart(int time)
-	{
-		full.Add(new string[] { "<start>" + time + "</start>" });
-		Console.WriteLine(full.Count);
-		if (full[1] == new string[]{"<start>" + time + "</start>"})
-		{
-			//full.Add(new string[] { "<start>" + time + "</start>" });
-            File.WriteAllLines(datapath, (IEnumerable<string>)full);
-            return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	public static bool setEnd(string time)
-	{
-		if (full.Count <= 0){
-			return false;
-		}
-		else{
-			full.Add(new string[] { "<end>" + Int32.Parse(time).ToString() + "</end>" });
-			File.WriteAllLines(datapath, (IEnumerable<string>)full);
-			return true;
-		}
-	}
+    
 }

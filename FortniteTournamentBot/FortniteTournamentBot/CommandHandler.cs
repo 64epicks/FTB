@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 namespace FortniteTournamentBot
 {
     public class CommandHandler
-    {
+	{
+		public static string[] WaitForTime = { "", "" };
+
 		private DiscordSocketClient _client;
 
 		private CommandService _service;
@@ -32,12 +34,13 @@ namespace FortniteTournamentBot
 
 			int argPos = 0;
 
-			if(msg.HasCharPrefix('!', ref argPos) || msg.HasCharPrefix('.', ref argPos)){
+			if (msg.HasCharPrefix('!', ref argPos) || msg.HasCharPrefix('.', ref argPos))
+			{
 				var result = await _service.ExecuteAsync(context, argPos);
 
-				if(!result.IsSuccess){
+				if (!result.IsSuccess)
+				{
 					await context.Channel.SendMessageAsync(result.ErrorReason);
-                    
 				}
 			}
 			Console.WriteLine(DateTime.Now + " " + context.Message.Author.Username + "#" + context.Message.Author.Id + "@" + context.Channel.Name + "#" + context.Channel.Id + ": \n" + context.Message.Content);

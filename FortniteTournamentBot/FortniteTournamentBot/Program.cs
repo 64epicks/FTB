@@ -22,13 +22,13 @@ namespace FortniteTournamentBot
 
 			_client = new DiscordSocketClient();
 
-			await _client.LoginAsync(TokenType.Bot, "NDU1MDYxMTc2ODI5NzM5MDE5.Df2gRQ.kfsWm_Es0CKJxkMF6K469PeEfbc");
+			await _client.LoginAsync(TokenType.Bot, "NDY2Mjg1ODMwOTM2NDYxMzEy.Dj0UcA.bbhRKhvCMLFeyxJb7GFaZNPzTG8");
 
 			await _client.StartAsync();
 
 			_handler = new CommandHandler(_client);
 
-			TournamentHandler.init();
+			//TournamentHandler.init();
 
 			await Task.Delay(-1);
 		}
