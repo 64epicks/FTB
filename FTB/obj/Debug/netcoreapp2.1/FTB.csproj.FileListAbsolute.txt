@@ -1,0 +1,13 @@
+/home/alastairp/Documents/Repos/FTB/FTB/bin/Debug/netcoreapp2.1/FTB.deps.json
+/home/alastairp/Documents/Repos/FTB/FTB/bin/Debug/netcoreapp2.1/FTB.runtimeconfig.json
+/home/alastairp/Documents/Repos/FTB/FTB/bin/Debug/netcoreapp2.1/FTB.runtimeconfig.dev.json
+/home/alastairp/Documents/Repos/FTB/FTB/bin/Debug/netcoreapp2.1/FTB.dll
+/home/alastairp/Documents/Repos/FTB/FTB/bin/Debug/netcoreapp2.1/FTB.pdb
+/home/alastairp/Documents/Repos/FTB/FTB/bin/Debug/netcoreapp2.1/SharpDBCore.dll
+/home/alastairp/Documents/Repos/FTB/FTB/bin/Debug/netcoreapp2.1/SharpDBCore.pdb
+/home/alastairp/Documents/Repos/FTB/FTB/obj/Debug/netcoreapp2.1/FTB.csprojResolveAssemblyReference.cache
+/home/alastairp/Documents/Repos/FTB/FTB/obj/Debug/netcoreapp2.1/FTB.csproj.CoreCompileInputs.cache
+/home/alastairp/Documents/Repos/FTB/FTB/obj/Debug/netcoreapp2.1/FTB.AssemblyInfoInputs.cache
+/home/alastairp/Documents/Repos/FTB/FTB/obj/Debug/netcoreapp2.1/FTB.AssemblyInfo.cs
+/home/alastairp/Documents/Repos/FTB/FTB/obj/Debug/netcoreapp2.1/FTB.dll
+/home/alastairp/Documents/Repos/FTB/FTB/obj/Debug/netcoreapp2.1/FTB.pdb
