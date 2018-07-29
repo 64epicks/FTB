@@ -4,7 +4,7 @@ using System.IO;
 using Discord;
 using Discord.WebSocket;
 using System.Threading.Tasks;
-
+using System.Threading;
 
 namespace FortniteTournamentBot
 {
@@ -27,8 +27,6 @@ namespace FortniteTournamentBot
             await _client.StartAsync();
 
             _handler = new CommandHandler(_client);
-
-            //TournamentHandler.init();
 
             await Task.Delay(-1);
         }

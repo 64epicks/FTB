@@ -18,25 +18,46 @@ namespace FortniteTournamentBot.Modules
 
         }
         [Command("new")]
-        public async Task newComp(string timeTo)
+        public async Task newComp()
         {
             await Context.Channel.SendMessageAsync("Creating tournament for channel " + Context.Channel.Id);
             try
             {
-                TournamentHandler.New(Context.Channel.Id.ToString(), timeTo);
+                TournamentHandler.New(Context.Channel.Id.ToString());
             }
             catch (Exception)
             {
                 await Context.Channel.SendMessageAsync("Tournament already going on!");
             }
-            CommandHandler.WaitForTime = new string[] { Context.Message.Author.Id.ToString(), Context.Channel.Id.ToString() };
-            await Context.Channel.SendMessageAsync("Please enter end time");
         }
-        [Command("newnew")]
-        public async Task newnew()
-        {
+        [Command("join")]
+		public async Task join(string input){
+			int id; 
+			string[] inputArr = input.Split(',');
+			if (inputArr.Length != 2) await Context.Channel.SendMessageAsync("Please input both username and platform (\"!join YOURUSERNAME,YOURPLATFORM\"");
+			else
+			{
 
-        }
+				id = TournamentHandler.Join(inputArr, Context.Channel.Id.ToString());
+
+				switch(id){
+					case -1:{
+							await Context.Channel.SendMessageAsync("Tournament does not exist!");
+							return;
+						};
+					case -2:{
+							await Context.Channel.SendMessageAsync("You have already joined!");
+							return;
+						}
+					case -3:{
+							await Context.Channel.SendMessageAsync("Account does not exist!");
+							return;
+						}
+				}
+
+				await Context.Channel.SendMessageAsync("You been added! Your id: " + id);
+			}
+		}
         // TODO: Understand why program freezes after one command
 
 
